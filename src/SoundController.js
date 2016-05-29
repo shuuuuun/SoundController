@@ -6,7 +6,6 @@ export default class SoundController {
         this.COOKIE_NAME = opts.COOKIE_NAME || 'isMute';
         this.EXPIRES_DATE = opts.EXPIRES_DATE;
         this.disableBlurPause = !!opts.disableBlurPause;
-        this.toggleSelector = opts.toggleSelector;
         
         this.audio = new Audio(opts.src);
         this.audio.volume = 0.2;
@@ -16,10 +15,6 @@ export default class SoundController {
     }
     
     initListeners() {
-        $(this.toggleSelector).on('click', () => {
-            this.toggleMute().pause().play();
-        });
-
         if (!this.disableBlurPause) {
             $(window).on('blur', () => {
                 this.pause();
