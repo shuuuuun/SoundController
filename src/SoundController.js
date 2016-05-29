@@ -8,8 +8,6 @@ export default class SoundController {
         this.disableBlurPause = !!opts.disableBlurPause;
         this.toggleSelector = opts.toggleSelector;
         
-        this.SE = {};
-        
         this.audio = new Audio(opts.src);
         this.audio.volume = 0.2;
         this.audio.loop = !opts.disableLoop;
@@ -67,23 +65,6 @@ export default class SoundController {
             flag = !this.getCookie();
         }
         flag ? this.mute() : this.unmute();
-        return this;
-    }
-    
-    setSE(key, src) {
-        // if (Const.IS_TOUCH) return this;
-        this.SE[key] = new Audio(src);
-        return this;
-    }
-    
-    playSE(key) {
-        if (this.audio.muted) return this;
-        // if (Const.IS_TOUCH) return this;
-        
-        let se = this.SE[key];
-        if (!se) return this;
-        
-        se.play();
         return this;
     }
     
