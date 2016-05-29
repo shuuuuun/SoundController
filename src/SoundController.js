@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 export default class SoundController {
     constructor(opts = {}) {
         
-        this.COOKIE_NAME = opts.COOKIE_NAME || "isMute";
+        this.COOKIE_NAME = opts.COOKIE_NAME || 'isMute';
         this.EXPIRES_DATE = opts.EXPIRES_DATE;
         this.disableBlurPause = !!opts.disableBlurPause;
         this.toggleSelector = opts.toggleSelector;
@@ -93,7 +93,7 @@ export default class SoundController {
     
     getCookie() {
         let value = Cookies.get(this.COOKIE_NAME);
-        return (value === "true");
+        return (value === 'true');
     }
     
     hasCookie() {
