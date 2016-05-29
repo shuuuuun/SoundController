@@ -27,6 +27,7 @@ var SoundController = function () {
         this.audio = new Audio(opts.src);
         this.audio.volume = 0.2;
         this.audio.loop = !opts.disableLoop;
+        this.audio.muted = this.getCookie();
 
         this.initListeners();
     }
