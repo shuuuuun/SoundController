@@ -36,7 +36,6 @@ export default class SoundController {
     }
     
     togglePlay(flag) {
-        // MEMO: this.toggleMute(flag).pause().play();
         if (flag === undefined) {
             flag = !this.audio.paused;
         }
