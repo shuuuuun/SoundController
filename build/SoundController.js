@@ -20,12 +20,9 @@ var SoundController = function () {
 
         _classCallCheck(this, SoundController);
 
-        this.COOKIE_NAME = opts.COOKIE_NAME || "isMute";
+        this.COOKIE_NAME = opts.COOKIE_NAME || 'isMute';
         this.EXPIRES_DATE = opts.EXPIRES_DATE;
         this.disableBlurPause = !!opts.disableBlurPause;
-        this.toggleSelector = opts.toggleSelector;
-
-        this.SE = {};
 
         this.audio = new Audio(opts.src);
         this.audio.volume = 0.2;
@@ -39,10 +36,6 @@ var SoundController = function () {
         value: function initListeners() {
             var _this = this;
 
-            $(this.toggleSelector).on('click', function () {
-                _this.toggleMute().pause().play();
-            });
-
             if (!this.disableBlurPause) {
                 $(window).on('blur', function () {
                     _this.pause();
@@ -54,7 +47,7 @@ var SoundController = function () {
     }, {
         key: 'play',
         value: function play() {
-            if (this.isMute) return this;
+            if (this.audio.muted) return this;
             this.audio.play();
             return this;
         }
@@ -76,17 +69,15 @@ var SoundController = function () {
     }, {
         key: 'mute',
         value: function mute() {
-            this.isMute = true;
             this.audio.muted = true;
-            this.setCookie(this.isMute);
+            this.setCookie(this.audio.muted);
             return this;
         }
     }, {
         key: 'unmute',
         value: function unmute() {
-            this.isMute = false;
             this.audio.muted = false;
-            this.setCookie(this.isMute);
+            this.setCookie(this.audio.muted);
             return this;
         }
     }, {
@@ -99,25 +90,6 @@ var SoundController = function () {
             return this;
         }
     }, {
-        key: 'setSE',
-        value: function setSE(key, src) {
-            // if (Const.IS_TOUCH) return this;
-            this.SE[key] = new Audio(src);
-            return this;
-        }
-    }, {
-        key: 'playSE',
-        value: function playSE(key) {
-            if (this.isMute) return this;
-            // if (Const.IS_TOUCH) return this;
-
-            var se = this.SE[key];
-            if (!se) return this;
-
-            se.play();
-            return this;
-        }
-    }, {
         key: 'setCookie',
         value: function setCookie(value) {
             return _jsCookie2.default.set(this.COOKIE_NAME, value, { expires: this.EXPIRES_DATE });
@@ -126,7 +98,7 @@ var SoundController = function () {
         key: 'getCookie',
         value: function getCookie() {
             var value = _jsCookie2.default.get(this.COOKIE_NAME);
-            return value === "true";
+            return value === 'true';
         }
     }, {
         key: 'hasCookie',
